@@ -1,0 +1,40 @@
+$primary_1: #497c8a;
+$primary_2: #b9b37f;
+$primary_3: #ad82ba;
+
+#header {
+    width: 100%;
+    display: inline-block;
+  }
+  nav {
+    overflow: hidden;
+    background-color: $primary_3;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    ul {
+      text-align: left;
+      list-style-type: none;
+      list-style-type: none;
+      margin: 0;
+      padding: 15px;
+      li {
+        display: inline;
+        font-family: "Fira Sans", sans-serif;
+        font-size: 17px;
+        a {
+          color: #f2f2f2;
+          text-decoration: none;
+          padding: 14px;
+          &:hover {
+            background-color: $primary_2;
+          }
+        }
+      }
+    }
+  }
+  
+  .content {
+    text-align: left;
+  }
+  

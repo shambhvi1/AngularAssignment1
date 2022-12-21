@@ -1,0 +1,13 @@
+$assetPath :"/assets/background-image";
+.welcome{
+    background: url(#{$assetPath}/rig.jfif);
+    background-size: cover;
+    margin: auto;
+    display:block;
+    position:absolute;
+    top:10;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
