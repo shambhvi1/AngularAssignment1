@@ -1,25 +1,17 @@
-import {  Component, Injector, NgModuleRef, ViewChild, ViewContainerRef, createNgModuleRef } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
+import { LazyLoadingService } from './shared/LazyLoading/lazy-loading.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'project';
-  @ViewChild('container', {read: ViewContainerRef})
-  container!: ViewContainerRef;
-
-  constructor(private injector: Injector) {}
+  constructor(private lazyLoadingService: LazyLoadingService){}
   
-lazyload(){
-      import('./core/core.module').then((module) => {
-      const lazymodule =module['CoreModule'];
-      let moduleRef: NgModuleRef<any>;
-      moduleRef =createNgModuleRef(lazymodule, this.injector);
-      const component= moduleRef.instance.getComponent();
-      this.container.createComponent(component, { ngModuleRef: moduleRef} );
-    });
-}
 
+  ngOnInit(){
+    // this.lazyLoadingService.lazyload();
+  }
 }

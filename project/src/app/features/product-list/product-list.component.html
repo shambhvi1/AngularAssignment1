@@ -3,7 +3,7 @@
    *ngIf="products && products.length">
   <thead>
       <tr>
-      <!-- <th>Image</th> -->
+      <th>Image</th>
       <th>Name</th>
       <th>code</th>
       <th>Price</th>
@@ -12,17 +12,17 @@
 </thead>
 <tbody>
 <tr *ngFor="let product of products">
-<!-- <td>
+<td>
 <img *ngIf=" product.imageUrl"
  [src]="product.imageUrl"
  [title]="product.productName"
  [style.width.px]="imageWidth"
  [style.margin.px]="imageMargin" alt="image not available">
-</td> -->
-<td>{{ product.productName }}</td>
+</td>
+<td><a [routerLink]="['/products', product.id]">{{ product.productName }}</a></td>
 <td>{{ product.productCode }}</td>
 <td>{{ product.price}}</td>
-<!-- <td><button class="button" [routerLink]="['/products', product.id, 'edit']"> Edit</button></td> -->
+<td><button class="button" [routerLink]="['/products', product.id, 'edit']"> Edit</button></td>
 </tr>
 </tbody>
 </table>
