@@ -1,5 +1,4 @@
-import { Compiler, Component, Injector, ViewChild, ViewContainerRef } from '@angular/core';
-import { LazyLoadingService } from './shared/LazyLoading/lazy-loading.service';
+import {  Component, Injector, NgModuleRef, ViewChild, ViewContainerRef, createNgModuleRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +7,19 @@ import { LazyLoadingService } from './shared/LazyLoading/lazy-loading.service';
 })
 export class AppComponent {
   title = 'project';
-  
-  //   myFirstLazyModuleId: import('./core/core.module'),
+  @ViewChild('container', {read: ViewContainerRef})
+  container!: ViewContainerRef;
 
-  // constructor(private lazyLoadingService: LazyLoadingService){}
-	// const myFirstLazyComponent = await this.lazyLoadingService.loadComponent(this.myFirstLazyModuleId, ViewContainerRef);
+  constructor(private injector: Injector) {}
+  
+lazyload(){
+      import('./core/core.module').then((module) => {
+      const lazymodule =module['CoreModule'];
+      let moduleRef: NgModuleRef<any>;
+      moduleRef =createNgModuleRef(lazymodule, this.injector);
+      const component= moduleRef.instance.getComponent();
+      this.container.createComponent(component, { ngModuleRef: moduleRef} );
+    });
+}
 
 }

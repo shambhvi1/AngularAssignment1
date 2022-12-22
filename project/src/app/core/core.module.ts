@@ -14,9 +14,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   exports: [NavbarComponent]
 })
 export class CoreModule { 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver){}
-
-  public resolveComponent(): ComponentFactory<NavbarComponent> {
-    return this.componentFactoryResolver.resolveComponentFactory(NavbarComponent);
+  getComponent(){
+    return NavbarComponent;
   }
 }
