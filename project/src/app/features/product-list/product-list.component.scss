@@ -16,28 +16,19 @@ $global-radius: 4px;
 }
 
 
-//SUPER BASIC PAGE STYLING
-*,*:before,*:after{
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-main {
-  padding: 2em;  
-  float: left;
-  width: 100%;
-}
+// //SUPER BASIC PAGE STYLING
+// *,*:before,*:after{
+//   -webkit-box-sizing: border-box;
+//   -moz-box-sizing: border-box;
+//   box-sizing: border-box;
+// }
+// main {
+//   padding: 2em;  
+//   float: left;
+//   width: 100%;
+// }
 
-a {
-  color: #222;
-  font-weight: bold;
-  text-decoration: none;
-  border-bottom: 2px solid #222;
-  
-  &:hover {
-    color: $primary_1;
-  }
-}
+
 ///BASIC TABLE STYLING
 table {
 	border-collapse: collapse;
@@ -285,21 +276,4 @@ table {
 	@extend %responive-tables-large;
 	@include responive-tables-large('Heading Col 1', 'Heading Col 2', 'Heading Col 3','Heading Col 4');
 }
-.button-basic {
-    border: none;
-    padding: 15px 30px;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .button-report  {
-    @extend .button-basic;
-    background-color: red;
-  }
-  
-  .button-submit  {
-    @extend .button-basic;
-    background-color: green;
-    color: white;
-  }
+

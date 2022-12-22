@@ -8,13 +8,16 @@ import { AppComponent } from './app.component';
 
 
 const routes: Routes = [
-  {
-  path: 'navbar',
-  loadChildren: () => import('./features/product-details').then(m => m.ProductDetailsModule)
-  },
+  //{
+  // path: 'product-details',
+  // loadChildren: () => import('./features/product-details/product-details.module').then(m => m.ProductDetailsModule)
+  // },
+  // {
+  //   path: 'product-list',
+  //   loadChildren: () => import('./features/product-list/product-list.module').then(m => m.ProductListModule)
+  // },
   { path: 'home', component: AppComponent },
   { path: 'products', component: ProductListComponent,},
-  
   {path:'edit', component: ProductManageFormComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '**', component: AppComponent }

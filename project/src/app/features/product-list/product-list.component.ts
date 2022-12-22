@@ -21,8 +21,7 @@ export class ProductListComponent {
         this.products= products;
         this.filteredProducts=products;
         console.log(products);
-        },
-      error: err => this.errorMessage = err
+        }
     })
     
   }

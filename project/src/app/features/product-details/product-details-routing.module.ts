@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, Routes } from '@angular/router';
+import { ProductDetailsService } from './service/product-details.service';
+import { Product } from 'src/app/shared/model/product.model';
 
 const routes: Routes = [];
 
@@ -7,4 +9,8 @@ const routes: Routes = [];
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProductDetailsRoutingModule { }
+export class ProductDetailsRoutingModule {
+ 
+}
+
+ 
