@@ -22,10 +22,11 @@
 <td><a [routerLink]="['/products', product.id]">{{ product.productName }}</a></td>
 <td>{{ product.productCode }}</td>
 <td>{{ product.price}}</td>
-<td><button class="button" [routerLink]="['/products', product.id, 'edit']"> Edit</button></td>
+<td><a class="btn btn-primary" (click)="functionedit(product.id)" >Edit</a></td>
 </tr>
 </tbody>
 </table>
 <p *ngIf="!products || products.length <0"> no products</p>
+
 </div>
 

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ProductManageFormComponent } from 'src/app/module/product-manage-form/product-manage-form.component';
 
 @Component({
   selector: 'app-navbar',
@@ -6,9 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  ngOnChanges() {
-    throw new Error('Method not implemented.');
-  }
+  
   title='navbar';
+  @ViewChild(ProductManageFormComponent) addview !:ProductManageFormComponent
 
+  openAddForm = () => 
+  { this.addview.open();}
 }
+
+

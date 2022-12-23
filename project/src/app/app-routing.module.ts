@@ -20,7 +20,6 @@ const routes: Routes = [
   { path: 'home', component: AppComponent },
   { path: 'products', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
-  { path:'edit', component: ProductManageFormComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '**', component: AppComponent }
 

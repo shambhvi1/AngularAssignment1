@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Product } from 'src/app/shared/model/product.model';
 import { ProductListService } from './services/product-list.service';
+import { ProductManageFormComponent } from 'src/app/module/product-manage-form/product-manage-form.component';
 
 @Component({
   selector: 'app-product-list',
@@ -8,6 +9,7 @@ import { ProductListService } from './services/product-list.service';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent {
+  @ViewChild(ProductManageFormComponent) addview !:ProductManageFormComponent
   filteredProducts: Product[] = [];
   products: Product[] = [];
   errorMessage = '';
@@ -24,6 +26,11 @@ export class ProductListComponent {
         }
     })
     
+  }
+  functionedit(code: string){
+
+    this.addview.LoadEditData(code);
+
   }
 
 }

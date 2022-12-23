@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductDetailsComponent } from './product-details.component';
+import { ProductListService } from '../product-list/services/product-list.service';
 
 
 
@@ -13,6 +14,7 @@ import { ProductDetailsComponent } from './product-details.component';
   ],
   exports: [
     ProductDetailsComponent
-  ]
+  ],
+  providers: [ProductListService]
 })
 export class ProductDetailsModule { }

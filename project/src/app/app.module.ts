@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from "./core/core.module";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductManageFormModule } from './module/product-manage-form/product-manage-form.module';
+import { ProductDetailsModule } from './features/product-details/product-details.module';
+import { ProductListModule } from './features/product-list/product-list.module';
 
 
 
@@ -20,7 +24,11 @@ import { CoreModule } from "./core/core.module";
         AppRoutingModule,
         ReactiveFormsModule,
         HttpClientModule,
-        CoreModule
+        CoreModule,
+        NgbModule,
+        ProductManageFormModule,
+        ProductDetailsModule,
+        ProductListModule
     ]
 })
 export class AppModule { }

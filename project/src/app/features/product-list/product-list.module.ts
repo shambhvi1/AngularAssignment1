@@ -3,6 +3,8 @@ import { CommonModule, NgIf } from '@angular/common';
 
 import { ProductListRoutingModule } from './product-list-routing.module';
 import { ProductListComponent } from './product-list.component';
+import { ProductListService } from './services/product-list.service';
+import { ProductManageFormModule } from 'src/app/module/product-manage-form/product-manage-form.module';
 
 
 
@@ -12,7 +14,9 @@ import { ProductListComponent } from './product-list.component';
   ],
   imports: [
     CommonModule,
-    ProductListRoutingModule
-  ]
+    ProductListRoutingModule,
+    ProductManageFormModule
+  ],
+  providers: [ProductListService]
 })
 export class ProductListModule { }
