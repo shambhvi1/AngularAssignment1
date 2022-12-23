@@ -16,4 +16,7 @@ export class ProductListService {
     return this.http.get<Product[]>(this.baseApiUrl)
 
   }
+  deleteProduct(id: string):  Observable<Product>{
+    return this.http.delete<Product>(this.baseApiUrl + '/' + id);
+   }
 }

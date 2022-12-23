@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ProductManageFormComponent } from 'src/app/module/product-manage-form/product-manage-form.component';
 
 @Component({
@@ -6,13 +6,15 @@ import { ProductManageFormComponent } from 'src/app/module/product-manage-form/p
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
-  
-  title='navbar';
+export class NavbarComponent implements AfterViewInit {
   @ViewChild(ProductManageFormComponent) addview !:ProductManageFormComponent
-
-  openAddForm = () => 
-  { this.addview.open();}
+  ngAfterViewInit(): void 
+  {
+  }
+  title='navbar';
+  openAddForm(){
+    this.addview.open();
+  }
 }
 
 

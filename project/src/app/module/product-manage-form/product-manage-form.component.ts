@@ -10,7 +10,7 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './product-manage-form.component.html',
   styleUrls: ['./product-manage-form.component.scss']
 })
-export class ProductManageFormComponent {
+export class ProductManageFormComponent implements OnInit {
   @ViewChild('content') addview !: ElementRef
   product: Product = {
     id: '',
@@ -36,7 +36,7 @@ export class ProductManageFormComponent {
                   productName: new FormControl('', Validators.required),
                   productCode: new FormControl('', Validators.required),
                   price: new FormControl(0, Validators.required),
-                  productImageUrl: new FormControl('',Validators.required),
+                 // productImageUrl: new FormControl('',Validators.required),
                   productDescription: new FormControl('',Validators.minLength(5)),
                 });
                }
@@ -50,21 +50,21 @@ export class ProductManageFormComponent {
     this.route.paramMap.subscribe({
       next: (params) => {
         const id = params.get('id');
-
+        console.log('yo:', id);
         if(id){
           //call api
           this.getProduct(id);
           }
       }
     })
+    
+    
   }
   getProduct(id: string): void {
     this.productManageService.getProduct(id)
-    //code is notified when the data is returned
       .subscribe({
-        next: (product: Product) => this.displayProduct(product),// process the product and display
-    
-      });
+        next: (product: Product) => this.displayProduct(product),
+    });
   }
   displayProduct(product: Product): void {
     if (this.productForm) {
@@ -86,7 +86,6 @@ export class ProductManageFormComponent {
       productName: this.product.productName,
       productCode: this.product.productCode,
       price: this.product.price,
-      productImageUrl: this.product.imageUrl,
       productDescription: this.product.description,
     });
   }
@@ -99,7 +98,7 @@ export class ProductManageFormComponent {
         //overwriting any values from the form
         const p = { ...this.product, ...this.productForm.value };
 
-        if (p.id === null) { 
+        if (p.id === '') { 
           this.productManageService.addProduct(p)
             .subscribe({
               next: () => this.onSaveComplete(),
@@ -116,9 +115,6 @@ export class ProductManageFormComponent {
       }
     } 
   }
-
- 
-  
   open() {
     this.productForm.reset();
     this.modalService
@@ -139,7 +135,7 @@ export class ProductManageFormComponent {
   }
   onSaveComplete(): void {
     // Reset the form to clear the flags
-    this.productForm.reset();
+    this.modalService.dismissAll();
     this.router.navigate(['/products']);
   }
  

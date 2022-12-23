@@ -7,7 +7,7 @@
       <th>Name</th>
       <th>code</th>
       <th>Price</th>
-      <th></th>
+      <th><app-product-manage-form></app-product-manage-form></th>
 </tr>
 </thead>
 <tbody>
@@ -22,11 +22,11 @@
 <td><a [routerLink]="['/products', product.id]">{{ product.productName }}</a></td>
 <td>{{ product.productCode }}</td>
 <td>{{ product.price}}</td>
-<td><a class="btn btn-primary" (click)="functionedit(product.id)" >Edit</a></td>
+<td><a id= "button" class="btn " (click)="openEditForm(product.id)">Edit</a>
+   <a id= "button" class="btn btn-danger" (click)="deleteProduct(product.id)" >Delete</a></td>
 </tr>
 </tbody>
 </table>
 <p *ngIf="!products || products.length <0"> no products</p>
-
 </div>
 
