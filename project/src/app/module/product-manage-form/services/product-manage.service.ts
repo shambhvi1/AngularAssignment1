@@ -23,7 +23,6 @@ export class ProductManageService {
   }
 
   updateProduct(id: string, updateProductRequest: Product ):  Observable<Product>{
-    console.log(updateProductRequest);
    return this.http.put<Product>(this.baseApiUrl + '/' + id, updateProductRequest);
   }
 

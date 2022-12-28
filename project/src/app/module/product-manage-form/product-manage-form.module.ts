@@ -21,4 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   exports: [ProductManageFormComponent]
 })
-export class ProductManageFormModule { }
+export class ProductManageFormModule {
+  getComponent(){
+    return ProductManageFormComponent;
+  }
+ }

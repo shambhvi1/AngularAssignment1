@@ -1,5 +1,8 @@
+
 <div class="main">
-  <table id="rwd-table"
+   
+   <app-search (searchEvent)="performFilter($event)"></app-search>
+   <table id="rwd-table"
    *ngIf="products && products.length">
   <thead>
       <tr>
@@ -7,11 +10,13 @@
       <th>Name</th>
       <th>code</th>
       <th>Price</th>
-      <th><app-product-manage-form></app-product-manage-form></th>
+      <th><ng-container #manageFormContainerRef ></ng-container></th>
 </tr>
 </thead>
 <tbody>
-<tr *ngFor="let product of products">
+<tr   *ngFor="let product of filteredProducts">
+  
+   
 <td>
 <img *ngIf=" product.imageUrl"
  [src]="product.imageUrl"
@@ -21,7 +26,8 @@
 </td>
 <td><a [routerLink]="['/products', product.id]">{{ product.productName }}</a></td>
 <td>{{ product.productCode }}</td>
-<td>{{ product.price}}</td>
+<td>{{ product.price | currency1:'INR'  }}</td>
+<td><a id= "button" class="btn " (click)="addToCart(product)" appHighlight [color]="color">Add To Cart</a></td>
 <td><a id= "button" class="btn " (click)="openEditForm(product.id)">Edit</a>
    <a id= "button" class="btn btn-danger" (click)="deleteProduct(product.id)" >Delete</a></td>
 </tr>

@@ -4,18 +4,19 @@ import { Injectable, Injector, NgModuleRef, ViewChild, ViewContainerRef, createN
   providedIn: 'root'
 })
 export class LazyLoadingService {
-  @ViewChild('container', {read: ViewContainerRef})
-  container!: ViewContainerRef;
+  
 
   constructor(private injector: Injector) { }
 
-  lazyload(){
-    import('../../core/core.module').then((module) => {
-    const lazymodule =module['CoreModule'];
+  lazyload(container: ViewContainerRef) {
+    import('../../module/product-manage-form/product-manage-form.module').then((module) => {
+    const lazymodule =module['ProductManageFormModule'];
     let moduleRef: NgModuleRef<any>;
     moduleRef =createNgModule(lazymodule, this.injector);
     const component= moduleRef.instance.getComponent();
-    this.container.createComponent(component, { ngModuleRef: moduleRef} );
+    container.createComponent(component, { ngModuleRef: moduleRef} );
+   
   });
+  
 }
 }

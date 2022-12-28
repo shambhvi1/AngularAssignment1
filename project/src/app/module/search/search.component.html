@@ -1,1 +1,5 @@
-<p>search works!</p>
+<div class="input-group">
+    <input type="text" class="form-control rounded" placeholder="Search" 
+    aria-label="Search" aria-describedby="search-addon" [(ngModel)]="_listFilter" (change)="onSearch()" />
+    <button type="button" class="btn btn-outline-primary" (click)="onSearch()" >search</button>
+  </div>

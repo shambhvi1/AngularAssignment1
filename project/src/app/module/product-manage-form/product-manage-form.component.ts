@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import {Component, ElementRef, AfterViewInit, OnInit, ViewChild, AfterContentInit } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductManageService } from './services/product-manage.service';
@@ -10,8 +10,9 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './product-manage-form.component.html',
   styleUrls: ['./product-manage-form.component.scss']
 })
-export class ProductManageFormComponent implements OnInit {
+export class ProductManageFormComponent implements OnInit, AfterViewInit {
   @ViewChild('content') addview !: ElementRef
+  
   product: Product = {
     id: '',
     productName: '',
@@ -31,12 +32,12 @@ export class ProductManageFormComponent implements OnInit {
                private router: Router,
                private route: ActivatedRoute,
                private fb: FormBuilder) { 
+
                 this.productForm = this.fb.group({
                   productId: new FormControl(),
                   productName: new FormControl('', Validators.required),
                   productCode: new FormControl('', Validators.required),
                   price: new FormControl(0, Validators.required),
-                 // productImageUrl: new FormControl('',Validators.required),
                   productDescription: new FormControl('',Validators.minLength(5)),
                 });
                }
@@ -45,25 +46,21 @@ export class ProductManageFormComponent implements OnInit {
 
     
     
-   ngOnInit(): void {
-   
-    this.route.paramMap.subscribe({
-      next: (params) => {
-        const id = params.get('id');
-        console.log('yo:', id);
-        if(id){
-          //call api
-          this.getProduct(id);
-          }
-      }
-    })
-    
-    
+   ngOnInit()  {}
+   ngAfterViewInit(){
+    this.modalService
+    .open(this.addview, { ariaLabelledBy: 'modal-basic-title' })
+    .result.then((result) => {
+    }, (reason) => {
+    });
   }
+   
+
+  
   getProduct(id: string): void {
     this.productManageService.getProduct(id)
       .subscribe({
-        next: (product: Product) => this.displayProduct(product),
+        next: (product: Product) => this.displayProduct(product)
     });
   }
   displayProduct(product: Product): void {
@@ -116,7 +113,6 @@ export class ProductManageFormComponent implements OnInit {
     } 
   }
   open() {
-    this.productForm.reset();
     this.modalService
     .open(this.addview, { ariaLabelledBy: 'modal-basic-title' })
     .result.then((result) => {
@@ -140,9 +136,8 @@ export class ProductManageFormComponent implements OnInit {
   }
  
   LoadEditData(id: string) {
-    this.open();
     this.getProduct(id);
     }
- 
+  
 
 }

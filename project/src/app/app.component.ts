@@ -1,4 +1,4 @@
-import {  Component, OnInit } from '@angular/core';
+import {  Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { LazyLoadingService } from './shared/LazyLoading/lazy-loading.service';
 
 @Component({
@@ -6,12 +6,14 @@ import { LazyLoadingService } from './shared/LazyLoading/lazy-loading.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'project';
-  constructor(private lazyLoadingService: LazyLoadingService){}
   
+ constructor() {}
 
-  ngOnInit(){
-    // this.lazyLoadingService.lazyload();
-  }
+
+ 
+ 
+ 
+
 }
