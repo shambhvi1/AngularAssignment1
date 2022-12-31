@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'currency1'
+  name: 'customCurrency'
 })
-export class Currency1Pipe implements PipeTransform {
+export class customCurrencyPipe implements PipeTransform {
 
   transform(value: number, currencyFormat : string)  {
     return new Intl.NumberFormat('en-IN', {

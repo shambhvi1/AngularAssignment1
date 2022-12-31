@@ -6,14 +6,19 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from "./core/core.module";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductDetailsComponent } from './features/product-details/product-details.component';
+import { ProductDetailsModule } from './features/product-details/product-details.module';
+
+import { ConfirmationDialogComponent } from './shared/modals/confirmation-dialog/confirmation-dialog.component';
 
 
 
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        ConfirmationDialogComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
@@ -23,7 +28,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         ReactiveFormsModule,
         HttpClientModule,
         CoreModule,
-        NgbModule
+        NgbModule,
+        NgbModalModule
     ]
 })
 export class AppModule { }

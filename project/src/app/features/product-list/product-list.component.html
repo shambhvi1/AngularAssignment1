@@ -24,11 +24,13 @@
  [style.width.px]="imageWidth"
  [style.margin.px]="imageMargin" alt="image not available">
 </td>
-<td><a [routerLink]="['/products', product.id]">{{ product.productName }}</a></td>
+<td><a (click)="productDetails(product)">
+   <!-- <a [routerLink]="['/products', product.id]"> -->
+   {{ product.productName }}</a></td>
 <td>{{ product.productCode }}</td>
-<td>{{ product.price | currency1:'INR'  }}</td>
+<td>{{ product.price | customCurrency:'INR'  }}</td>
 <td><a id= "button" class="btn " (click)="addToCart(product)" appHighlight [color]="color">Add To Cart</a></td>
-<td><a id= "button" class="btn " (click)="openEditForm(product.id)">Edit</a>
+<td><a id= "button" class="btn " (click)="openEditForm(product)">Edit</a>
    <a id= "button" class="btn btn-danger" (click)="deleteProduct(product.id)" >Delete</a></td>
 </tr>
 </tbody>

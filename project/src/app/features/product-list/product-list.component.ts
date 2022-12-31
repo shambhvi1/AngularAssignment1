@@ -1,11 +1,12 @@
-import { AfterViewInit, Component, ComponentFactoryResolver, ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component,  ElementRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Product } from 'src/app/shared/model/product.model';
 import { ProductListService } from './services/product-list.service';
-import { Currency1Pipe } from '../../shared/pipes/currency.pipe'
+import { customCurrencyPipe } from '../../shared/pipes/customCurrency.pipe'
 import { Router } from '@angular/router';
 import { LazyLoadingService } from 'src/app/shared/LazyLoading/lazy-loading.service';
 import { CartService } from './services/cart.service';
 import { ProductManageFormComponent } from 'src/app/module/product-manage-form/product-manage-form.component';
+import { ConfirmationDialogService } from 'src/app/shared/modals/services/confirmation-dialog.service';
 
 
 @Component({
@@ -21,11 +22,14 @@ export class ProductListComponent implements OnInit,AfterViewInit {
   imageWidth = 50;
   imageMargin = 2;
   color='white';
+  modulePath='../../module/product-manage-form/product-manage-form.module';
+  moduleName='ProductManageFormModule';
 
   constructor(private productService: ProductListService,
               private router: Router,
               private lazyLoadService: LazyLoadingService,
-              private cartService: CartService) { }
+              private cartService: CartService,
+              private confirmationService: ConfirmationDialogService) { }
   @ViewChild('manageFormContainerRef', {read: ViewContainerRef})
   manageFormContainerRef!: ViewContainerRef;
   ngAfterViewInit(): void {
@@ -47,31 +51,38 @@ export class ProductListComponent implements OnInit,AfterViewInit {
   }
     
   
-  openEditForm(id: string){
-    this.lazyLoadService.lazyload(this.manageFormContainerRef);
+  openEditForm(product: Product){
+    this.lazyLoadService.lazyload(this.manageFormContainerRef,this.modulePath,this.moduleName);
     const compRef = this.manageFormContainerRef.createComponent(ProductManageFormComponent);
-    compRef.instance.LoadEditData(id);
+    compRef.instance.LoadEditData(product);
      
    
 
   }
   deleteProduct(id: string){
-    if (confirm("Do you want to save changes?") == true) {
-      this.productService.deleteProduct(id)
-    .subscribe({
-      next: () => {
+    this.confirmationService.confirm('Are u sure', 'You want to delete ?')
+    .then((confirmed) => {
+      if (confirmed== true)
+      {
+        this.productService.deleteProduct(id)
+        .subscribe({
+        next: () => {
         this.router.navigate(['home']);
       }
     });
-      
-  } else {
-      alert("delete cancelled");
+  }
+})
   }
     
-  }
+    
+  
   addToCart(product: Product) {
     this.cartService.addToCart(product);
     window.alert('Your product has been added to the cart!');
+  }
+  productDetails(product: Product){
+    this.router.navigate(['/prodDetail'],{queryParams:  product });
+    
   }
 
 

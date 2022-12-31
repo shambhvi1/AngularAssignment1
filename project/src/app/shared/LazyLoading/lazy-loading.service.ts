@@ -8,9 +8,9 @@ export class LazyLoadingService {
 
   constructor(private injector: Injector) { }
 
-  lazyload(container: ViewContainerRef) {
-    import('../../module/product-manage-form/product-manage-form.module').then((module) => {
-    const lazymodule =module['ProductManageFormModule'];
+  lazyload(container: ViewContainerRef, modulePath: string, moduleName: string) {
+    import(modulePath).then((module) => {
+    const lazymodule =module[moduleName];
     let moduleRef: NgModuleRef<any>;
     moduleRef =createNgModule(lazymodule, this.injector);
     const component= moduleRef.instance.getComponent();

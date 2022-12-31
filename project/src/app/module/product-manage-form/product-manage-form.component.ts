@@ -5,12 +5,13 @@ import { ProductManageService } from './services/product-manage.service';
 import { Product } from 'src/app/shared/model/product.model';
 import { FormBuilder, FormControl, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationDialogService } from 'src/app/shared/modals/services/confirmation-dialog.service';
 @Component({
   selector: 'app-product-manage-form',
   templateUrl: './product-manage-form.component.html',
   styleUrls: ['./product-manage-form.component.scss']
 })
-export class ProductManageFormComponent implements OnInit, AfterViewInit {
+export class ProductManageFormComponent implements AfterViewInit {
   @ViewChild('content') addview !: ElementRef
   
   product: Product = {
@@ -31,7 +32,8 @@ export class ProductManageFormComponent implements OnInit, AfterViewInit {
                private productManageService: ProductManageService,
                private router: Router,
                private route: ActivatedRoute,
-               private fb: FormBuilder) { 
+               private fb: FormBuilder,
+               private confirmationService: ConfirmationDialogService) { 
 
                 this.productForm = this.fb.group({
                   productId: new FormControl(),
@@ -41,28 +43,25 @@ export class ProductManageFormComponent implements OnInit, AfterViewInit {
                   productDescription: new FormControl('',Validators.minLength(5)),
                 });
                }
-
-  
-
-    
-    
-   ngOnInit()  {}
    ngAfterViewInit(){
+
     this.modalService
     .open(this.addview, { ariaLabelledBy: 'modal-basic-title' })
     .result.then((result) => {
     }, (reason) => {
     });
+
   }
+  
    
 
   
-  getProduct(id: string): void {
-    this.productManageService.getProduct(id)
-      .subscribe({
-        next: (product: Product) => this.displayProduct(product)
-    });
-  }
+  // getProduct(id: string): void {
+  //   this.productManageService.getProduct(id)
+  //     .subscribe({
+  //       next: (product: Product) => this.displayProduct(product)
+  //   });
+  // }
   displayProduct(product: Product): void {
     if (this.productForm) {
       this.productForm.reset();
@@ -112,13 +111,7 @@ export class ProductManageFormComponent implements OnInit, AfterViewInit {
       }
     } 
   }
-  open() {
-    this.modalService
-    .open(this.addview, { ariaLabelledBy: 'modal-basic-title' })
-    .result.then((result) => {
-    }, (reason) => {
-    });
-  }
+  
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -131,12 +124,22 @@ export class ProductManageFormComponent implements OnInit, AfterViewInit {
   }
   onSaveComplete(): void {
     // Reset the form to clear the flags
+    debugger;
     this.modalService.dismissAll();
-    this.router.navigate(['/products']);
+    this.confirmationService.confirm('Success', 'Saved Sucessfully')
+  .then((confirmed) => {
+    if(confirmed== true){
+
+      this.router.navigate(['/products']);
+    }
+})
+    
+   
   }
  
-  LoadEditData(id: string) {
-    this.getProduct(id);
+  LoadEditData(product: Product) {
+    
+    this.displayProduct(product);
     }
   
 

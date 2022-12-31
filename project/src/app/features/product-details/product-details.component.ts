@@ -10,31 +10,29 @@ import { ProductDetailsService } from './service/product-details.service';
 })
 export class ProductDetailsComponent {
   pageTitle = 'Product Detail';
-  product: Product | undefined;
+  product: Product={
+    id: '',
+    productName: '',
+    productCode: '',
+    releaseDate: '',
+    price: 0,
+    description: '',
+    imageUrl: ''
+  };
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private productService: ProductDetailsService) {
+  constructor(private route: ActivatedRoute) {
   }
 
-  ngOnInit(): void {
-    this.route.paramMap.subscribe({
-      next: (params) => {
-        const id = params.get('id');
-
-        if(id){
-          //call api
-          this.productService.getProduct(id).
-          subscribe({
-            next: (response) => {
-              this.product = response;
-            }
-          })
-        }
-      }
-        
-        })
+  ngOnInit() {
+    this.route.queryParams
+    .subscribe((params: any) => {
+          this.product=params;
+          console.log(this.product)
+    })
   }
-
+          
+            
+     
+  
 
 }

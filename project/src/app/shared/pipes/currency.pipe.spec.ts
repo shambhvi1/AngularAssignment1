@@ -1,4 +1,4 @@
-import { CurrencyPipe } from './currency.pipe';
+import { CurrencyPipe } from './customCurrency.pipe';
 
 describe('CurrencyPipe', () => {
   it('create an instance', () => {
