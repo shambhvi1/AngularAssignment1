@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -10,8 +10,9 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 
-export class ConfirmationDialogComponent {
-  @Input() title='';
+export class ConfirmationDialogComponent implements AfterViewInit{
+  @ViewChild('confirmationDialog') addview !: ElementRef
+@Input() title='';
 
 @Input() message='';
 
@@ -19,7 +20,16 @@ export class ConfirmationDialogComponent {
 
 @Input() btnCancelText='';
 
-constructor(private activeModal: NgbActiveModal) { }
+constructor(private activeModal: NgbActiveModal,
+  private modalService: NgbModal) { }
+ngAfterViewInit(){
+this.modalService
+  .open(this.addview, { ariaLabelledBy: 'modal-basic-title' })
+  .result.then((result) => {
+  }, (reason) => {
+  });
+
+}
 
 
 public decline() {

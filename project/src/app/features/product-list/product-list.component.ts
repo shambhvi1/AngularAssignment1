@@ -30,8 +30,13 @@ export class ProductListComponent implements OnInit,AfterViewInit {
               private lazyLoadService: LazyLoadingService,
               private cartService: CartService,
               private confirmationService: ConfirmationDialogService) { }
+ @ViewChild('confirmationDialogContainerRef', {read: ViewContainerRef})
+              confirmationDialogContainerRef!: ViewContainerRef;
   @ViewChild('manageFormContainerRef', {read: ViewContainerRef})
   manageFormContainerRef!: ViewContainerRef;
+
+ 
+
   ngAfterViewInit(): void {
 
   }
@@ -60,18 +65,23 @@ export class ProductListComponent implements OnInit,AfterViewInit {
 
   }
   deleteProduct(id: string){
-    this.confirmationService.confirm('Are u sure', 'You want to delete ?')
-    .then((confirmed) => {
-      if (confirmed== true)
-      {
-        this.productService.deleteProduct(id)
-        .subscribe({
-        next: () => {
-        this.router.navigate(['home']);
-      }
-    });
-  }
-})
+    const yp= this.confirmationService
+    .confirm('Are u sure', 'You want to delete ?', this.confirmationDialogContainerRef);
+    debugger;
+    yp.then((confirmed) => 
+    {
+            console.log(confirmed);
+            
+            if (confirmed)
+            {
+              this.productService.deleteProduct(id)
+              .subscribe({
+              next: () => {
+              this.router.navigate(['home']);
+            }
+          });
+        }
+  })
   }
     
     

@@ -8,6 +8,7 @@ import { customCurrencyPipe } from '../../shared/pipes/customCurrency.pipe';
 
 import { SearchModule } from 'src/app/module/search/search.module';
 import { HighlightDirective } from './directives/higlight.directive';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -18,7 +19,7 @@ import { HighlightDirective } from './directives/higlight.directive';
         customCurrencyPipe,
         HighlightDirective
     ],
-    providers: [ProductListService],
+    providers: [ProductListService, NgbActiveModal],
     imports: [
         CommonModule,
         ProductListRoutingModule,

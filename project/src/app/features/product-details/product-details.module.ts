@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductDetailsComponent } from './product-details.component';
 import { ProductListService } from '../product-list/services/product-list.service';
+import { ProductDetailsRoutingModule } from './product-details-routing.module';
 
 
 
@@ -10,7 +11,7 @@ import { ProductListService } from '../product-list/services/product-list.servic
     ProductDetailsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,ProductDetailsRoutingModule
   ],
   exports: [
     ProductDetailsComponent

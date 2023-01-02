@@ -1,4 +1,4 @@
-import {Component, ElementRef, AfterViewInit, OnInit, ViewChild, AfterContentInit } from '@angular/core';
+import {Component, ElementRef, AfterViewInit, OnInit, ViewChild, AfterContentInit, ViewContainerRef } from '@angular/core';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductManageService } from './services/product-manage.service';
@@ -13,7 +13,8 @@ import { ConfirmationDialogService } from 'src/app/shared/modals/services/confir
 })
 export class ProductManageFormComponent implements AfterViewInit {
   @ViewChild('content') addview !: ElementRef
-  
+  @ViewChild('confirmationDialogContainerRef', {read: ViewContainerRef})
+              confirmationDialogContainerRef!: ViewContainerRef;
   product: Product = {
     id: '',
     productName: '',
@@ -126,7 +127,7 @@ export class ProductManageFormComponent implements AfterViewInit {
     // Reset the form to clear the flags
     debugger;
     this.modalService.dismissAll();
-    this.confirmationService.confirm('Success', 'Saved Sucessfully')
+    this.confirmationService.confirm('Success', 'Saved Sucessfully',this.confirmationDialogContainerRef)
   .then((confirmed) => {
     if(confirmed== true){
 

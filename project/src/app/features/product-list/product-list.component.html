@@ -10,7 +10,7 @@
       <th>Name</th>
       <th>code</th>
       <th>Price</th>
-      <th><ng-container #manageFormContainerRef ></ng-container></th>
+      <th><ng-container #manageFormContainerRef ></ng-container> </th>
 </tr>
 </thead>
 <tbody>
@@ -24,13 +24,14 @@
  [style.width.px]="imageWidth"
  [style.margin.px]="imageMargin" alt="image not available">
 </td>
-<td><a (click)="productDetails(product)">
-   <!-- <a [routerLink]="['/products', product.id]"> -->
+<td><a [routerLink]="['/products', product.id]">
    {{ product.productName }}</a></td>
 <td>{{ product.productCode }}</td>
 <td>{{ product.price | customCurrency:'INR'  }}</td>
 <td><a id= "button" class="btn " (click)="addToCart(product)" appHighlight [color]="color">Add To Cart</a></td>
+
 <td><a id= "button" class="btn " (click)="openEditForm(product)">Edit</a>
+   <ng-container #confirmationDialogContainerRef></ng-container>
    <a id= "button" class="btn btn-danger" (click)="deleteProduct(product.id)" >Delete</a></td>
 </tr>
 </tbody>
